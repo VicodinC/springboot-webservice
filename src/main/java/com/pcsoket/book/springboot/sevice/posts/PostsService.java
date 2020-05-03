@@ -1,7 +1,9 @@
 package com.pcsoket.book.springboot.sevice.posts;
 
+import com.pcsoket.book.springboot.domain.posts.Posts;
 import com.pcsoket.book.springboot.domain.posts.PostsRepository;
 import com.pcsoket.book.springboot.web.dto.PostsSaveRequestDto;
+import com.pcsoket.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,5 +17,15 @@ public class PostsService {
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {
         return  postsRepository.save(requestDto.toEntity()).getId();
+    }
+
+    @Transactional
+    public Long update(Long id, PostsUpdateRequestDto requestDto) {
+        Posts posts = postsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id : " + id));
+
+        postsRepository.update(id, requestDto);
+
+        return id;
     }
 }

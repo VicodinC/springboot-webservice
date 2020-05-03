@@ -21,6 +21,7 @@ public class Posts {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    @Column
     private String author;
 
     @Builder
