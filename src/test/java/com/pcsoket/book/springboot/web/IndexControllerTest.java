@@ -1,13 +1,32 @@
 package com.pcsoket.book.springboot.web;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class IndexControllerTest {
 
-    @Test
-    public void index_불러온다() {
+    @LocalServerPort
+    private int port;
 
+    @Autowired
+    private TestRestTemplate template;
+
+    @Test
+    public void 메인페이지_로딩() {
+        //when
+        String body = this.template.getForObject("/", String.class);
+
+        //then
+        assertThat(body).contains("스프링");
     }
 }
