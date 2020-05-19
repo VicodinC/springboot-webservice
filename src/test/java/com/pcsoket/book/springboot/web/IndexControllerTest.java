@@ -29,4 +29,13 @@ public class IndexControllerTest {
         //then
         assertThat(body).contains("스프링");
     }
+
+    @Test
+    public void posts_등록_로딩() {
+        //when
+        String body = this.template.getForObject("/posts/save", String.class);
+
+        //then
+        assertThat(body).contains("게시물 등록");
+    }
 }
