@@ -26,3 +26,5 @@ var index = {
         })
     }
 }
+
+index.init();pl5
