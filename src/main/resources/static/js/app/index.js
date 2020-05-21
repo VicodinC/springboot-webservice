@@ -35,7 +35,7 @@ var index = {
 
         $.ajax({
             type: 'PUT',
-            url: '/api/v1/posts',
+            url: '/api/v1/posts/'+id,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
