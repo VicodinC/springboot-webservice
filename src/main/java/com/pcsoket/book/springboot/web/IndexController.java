@@ -22,9 +22,9 @@ public class IndexController {
         return "posts-save";
     }
 
-    @GetMapping("/posts/save")
-    public String postsSave() {
-        return "posts-save";
+    @GetMapping("/posts/update")
+    public String postsUpdate() {
+        return "posts-update";
     }
 
 }
