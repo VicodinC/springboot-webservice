@@ -3,7 +3,10 @@ var index = {
         var _this = this;
         $('#btn-save').on('click',function () {
             _this.save();
-        })
+        });
+        $('#btn-update').on('click',function () {
+            _this.update();
+        });
     },
     save: function () {
         var data = {
