@@ -1,5 +1,7 @@
 package com.pcsoket.book.springboot.web;
 
+import com.pcsoket.book.springboot.config.auth.dto.SessionUser;
+import com.pcsoket.book.springboot.domain.user.User;
 import com.pcsoket.book.springboot.sevice.posts.PostsService;
 import com.pcsoket.book.springboot.web.dto.PostsListResponseDto;
 import com.pcsoket.book.springboot.web.dto.PostsResponseDto;
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -16,10 +19,18 @@ import java.util.List;
 public class IndexController {
 
     private final PostsService postsService;
+    private final HttpSession httpSession;
+
     @GetMapping("/")
     public String index(Model model) {
         List<PostsListResponseDto> posts = postsService.findAllDesc();
         model.addAttribute("posts", posts);
+
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+
+        if( user != null) {
+            model.addAttribute("userName", user.getName());
+        }
         return "index";
     }
 
