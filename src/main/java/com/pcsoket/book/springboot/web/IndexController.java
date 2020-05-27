@@ -1,5 +1,6 @@
 package com.pcsoket.book.springboot.web;
 
+import com.pcsoket.book.springboot.config.auth.LoginUser;
 import com.pcsoket.book.springboot.config.auth.dto.SessionUser;
 import com.pcsoket.book.springboot.domain.user.User;
 import com.pcsoket.book.springboot.sevice.posts.PostsService;
@@ -22,11 +23,9 @@ public class IndexController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionUser user) {
         List<PostsListResponseDto> posts = postsService.findAllDesc();
         model.addAttribute("posts", posts);
-
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
 
         if( user != null) {
             model.addAttribute("userName", user.getName());
