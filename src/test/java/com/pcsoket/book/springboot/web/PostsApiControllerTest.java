@@ -5,6 +5,7 @@ import com.pcsoket.book.springboot.domain.posts.PostsRepository;
 import com.pcsoket.book.springboot.web.dto.PostsSaveRequestDto;
 import com.pcsoket.book.springboot.web.dto.PostsUpdateRequestDto;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -34,12 +36,18 @@ public class PostsApiControllerTest {
     @Autowired
     private PostsRepository postsRepository;
 
+    @Before
+    public void setUp() {
+
+    }
+
     @After
     public void tearDown() throws Exception {
         postsRepository.deleteAll();
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     public void Posts_등록된다() throws Exception {
         //given
         String title = "title";
