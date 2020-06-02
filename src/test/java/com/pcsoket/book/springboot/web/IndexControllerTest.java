@@ -35,6 +35,6 @@ public class IndexControllerTest {
         String body = this.template.getForObject("/posts/save", String.class);
 
         //then
-        assertThat(body).contains("게시물 등록");
+        assertThat(body).contains("게시글 등록");
     }
 }
